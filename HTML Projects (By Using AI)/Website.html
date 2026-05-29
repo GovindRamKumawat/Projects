@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VortexTechWarp | Digital Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Book Theme Colors */
+            --paper-color: #fdfaf3; /* Light Cream / Parchment */
+            --ink-color: #2c2c2c;
+            --accent-sepia: #704214;
+            --primary-blue: #2563eb;
+            --soft-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --book-border: #e8e2d2;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--paper-color);
+            /* Subtle Paper Texture Background */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            color: var(--ink-color);
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: rgba(253, 250, 243, 0.95);
+            backdrop-filter: blur(10px);
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            border-bottom: 1px solid var(--book-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            z-index: 2100;
+        }
+
+        /* Enhanced Animated Logo Box */
+        .logo-box {
+            width: 55px;
+            height: 55px;
+            background: var(--white);
+            border: 2px solid var(--accent-sepia);
+            border-radius: 12px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #fff;
+            box-shadow: 5px 5px 0px var(--accent-sepia);
+            transition: var(--transition);
+            animation: logoEntrance 1s ease-out;
+        }
+
+        @keyframes logoEntrance {
+            from { transform: rotate(-20deg) scale(0); opacity: 0; }
+            to { transform: rotate(0deg) scale(1); opacity: 1; }
+        }
+
+        .logo-box:hover {
+            transform: rotate(-5deg) translateY(-3px);
+            box-shadow: 8px 8px 0px var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--ink-color);
+            letter-spacing: -1px;
+        }
+
+        /* Desktop Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink-color);
+            font-size: 1rem;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-sepia);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- MOBILE MENU (FIXED GLITCH) --- */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 2100;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--ink-color);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* --- HERO BANNER (BOOK STYLE) --- */
+        .hero-banner {
+            margin: 40px 8%;
+            padding: 80px 40px;
+            background: #fff;
+            border: 1px solid var(--book-border);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--soft-shadow);
+            position: relative;
+        }
+
+        /* Decorative Book Corners */
+        .hero-banner::before, .hero-banner::after {
+            content: '❧';
+            position: absolute;
+            color: var(--book-border);
+            font-size: 2rem;
+        }
+        .hero-banner::before { top: 20px; left: 20px; }
+        .hero-banner::after { bottom: 20px; right: 20px; }
+
+        .hero-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-sepia);
+        }
+
+        .search-wrapper {
+            max-width: 600px;
+            margin: 40px auto 0;
+            position: relative;
+        }
+
+        .search-container {
+            display: flex;
+            background: var(--paper-color);
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid var(--book-border);
+            transition: var(--transition);
+        }
+
+        .search-container:focus-within {
+            border-color: var(--accent-sepia);
+            box-shadow: 0 0 15px rgba(112, 66, 20, 0.1);
+        }
+
+        .search-container input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .search-container button {
+            background: var(--accent-sepia);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .search-container button:hover {
+            background: var(--ink-color);
+        }
+
+        /* --- ARTICLE GRID --- */
+        .main-content {
+            padding: 60px 8%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+        }
+
+        .line {
+            flex: 1;
+            height: 1px;
+            background: var(--book-border);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--book-border);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border-color: var(--accent-sepia);
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            height: 80%;
+            width: 4px;
+            background: var(--book-border);
+            border-radius: 0 4px 4px 0;
+            transition: var(--transition);
+        }
+
+        .article-card:hover::before {
+            background: var(--accent-sepia);
+        }
+
+        .tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-sepia);
+            font-weight: 700;
+        }
+
+        .article-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .article-card p {
+            font-size: 0.95rem;
+            color: #555;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            margin-top: auto;
+            font-weight: 600;
+            color: var(--accent-sepia);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: white;
+            border-top: 1px solid var(--book-border);
+            padding: 80px 8% 40px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 992px) {
+            .brand-name { font-size: 1.5rem; }
+            .hero-banner h1 { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 5%; height: 75px; }
+            
+            .menu-toggle { display: flex; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 80%;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                transition: 0.5s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero-banner { margin: 20px 5%; padding: 40px 20px; }
+            .hero-banner h1 { font-size: 2.2rem; }
+            
+            .article-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animations */
+        [data-aos] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        [data-aos].appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo-container">
+            <div class="logo-box">
+                <img src="https://drive.google.com/thumbnail?id=1e0xb0rxRxre5sfSePxXVko0FBYBeb4LR&sz=w200" alt="Vortex Logo">
+            </div>
+            <span class="brand-name">VortexTechWarp</span>
+        </a>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#articles">Articles</a></li>
+            <li><a href="#search">Advance Search</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="hero-banner" data-aos>
+        <span class="tag" style="margin-bottom: 20px; display: block;">Established 2026</span>
+        <h1>Curated Knowledge <br>& Tech Stories</h1>
+        <p>A quiet space to read about SBI, HDFC, and the ever-evolving world of technology.</p>
+        
+        <div class="search-wrapper">
+            <div class="search-container">
+                <input type="text" placeholder="Search the library...">
+                <button>Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="articles">
+        <div class="section-header">
+            <h2>Recent Articals</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="article-grid">
+            <article class="article-card" data-aos>
+                <span class="tag">Banking</span>
+                <h3>Security Protocols: SBI Digital 2026</h3>
+                <p>Navigating the new security landscape of Indian banking. How to protect your assets in a hyper-connected world.</p>
+                <div class="read-more">Open Article <span>→</span></div>
+            </article>
+
+            <article class="article-card" data-aos>
+                <span class="tag">Finance</span>
+                <h3>HDFC Wealth Management Guide</h3>
+                <p>Understanding the transition from traditional saving to smart AI-driven investing with HDFC's latest tools.</p>
+                <div class="read-more">Open Article <span>→</span></div>
+            </article>
+
+            <article class="article-card" data-aos>
+                <span class="tag">Technology</span>
+                <h3>The Warp Speed of Modern Web</h3>
+                <p>How VortexTechWarp uses modern CSS architectures to provide a seamless reading experience for global users.</p>
+                <div class="read-more">Open Article <span>→</span></div>
+            </article>
+
+            <article class="article-card" data-aos>
+                <span class="tag">System</span>
+                <h3>Linux for Beginners: The Terminal</h3>
+                <p>A deep dive into why every tech enthusiast should master the command line in 2026.</p>
+                <div class="read-more">Open Article <span>→</span></div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-logo">VortexTechWarp</span>
+        <div style="margin-bottom: 30px; display: flex; justify-content: center; gap: 20px; font-weight: 600;">
+            <a href="#" style="color: var(--ink-color); text-decoration: none;">Privacy</a>
+            <a href="#" style="color: var(--ink-color); text-decoration: none;">Archive</a>
+            <a href="#" style="color: var(--ink-color); text-decoration: none;">Contact</a>
+        </div>
+        <p style="color: #888; font-size: 0.9rem;">&copy; 2026 VortexTechWarp. Hand-crafted for knowledge seekers.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle Logic (Fixes Glitch)
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Animate Hamburger
+            const spans = mobileMenu.querySelectorAll('span');
+            spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+            spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(7px, -8px)' : 'none';
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+        // Click interaction for articles
+        document.querySelectorAll('.article-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px)';
+                    alert("Article is loading in a new paper-view window...");
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

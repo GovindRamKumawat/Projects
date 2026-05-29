@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VortexTechWarp | The Financial Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #fcfaf5;
+            --ink-color: #1a1a1a;
+            --accent-gold: #947a4d;
+            --border-color: #e3ddd0;
+            --soft-shadow: 0 15px 45px rgba(0,0,0,0.05);
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--paper-color);
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            color: var(--ink-color);
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- GLOBAL WRAPPER (Zoom-out Fix) --- */
+        .site-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* --- NAVIGATION (Fixed) --- */
+        nav {
+            background: rgba(252, 250, 245, 0.95);
+            backdrop-filter: blur(15px);
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            width: 45px; height: 45px;
+            background: #fff;
+            border: 1px solid var(--accent-gold);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 3px 3px 0px var(--accent-gold);
+        }
+        .logo-box img { width: 80%; height: 80%; object-fit: contain; }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink-color);
+        }
+
+        /* Nav Links - Hamesha Hidden rahenge jab tak 'active' na ho */
+        .nav-links {
+            position: fixed;
+            right: -100%; /* Screen se bahar */
+            top: 0;
+            height: 100vh;
+            width: 300px; /* Side bar ki tarah */
+            background: #fff;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            display: flex;
+            list-style: none;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            z-index: 2500;
+        }
+
+        .nav-links.active {
+            right: 0; /* Click karne par andar aayenge */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Menu Button (Hamesha dikhega) */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 2600; /* Links se upar */
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--ink-color);
+            transition: 0.3s;
+        }
+
+        /* Close Button Animation */
+        .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        /* --- HERO & CONTENT --- */
+        .hero {
+            padding: 80px 5%;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 30px auto;
+            display: flex;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .search-box input { flex: 1; padding: 15px; border: none; outline: none; }
+        .search-box button { background: var(--ink-color); color: #fff; border: none; padding: 0 25px; cursor: pointer; }
+
+        .main-content { padding: 60px 5%; }
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--soft-shadow); }
+        .card .tag { color: var(--accent-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 10px 0; }
+
+        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--border-color); background: #fff; }
+
+        /* --- OVERLAY --- */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: none;
+            z-index: 2400;
+        }
+        .overlay.active { display: block; }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="site-wrapper">
+    <nav>
+        <a href="#" class="logo-container">
+            <div class="logo-box">
+                <img src="https://drive.google.com/thumbnail?id=1e0xb0rxRxre5sfSePxXVko0FBYBeb4LR&sz=w200" alt="Logo">
+            </div>
+            <span class="brand-name">VortexTechWarp</span>
+        </a>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Finance Journal</a></li>
+            <li><a href="#">Advance Search</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <span style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--accent-gold);">The Art of Finance</span>
+        <h1>Insights into Global <br>Legal Wealth</h1>
+        <p>A minimalist library dedicated to verified financial literacy.</p>
+        
+        <div class="search-box">
+            <input type="text" placeholder="Search the journals...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 30px;">Latest Journals</h2>
+        <div class="article-grid">
+            <div class="card">
+                <span class="tag">Fiscal Policy</span>
+                <h3>Digital Banking Laws 2026</h3>
+                <p>Understanding the legal framework behind global transactions.</p>
+            </div>
+            <div class="card">
+                <span class="tag">Asset Protection</span>
+                <h3>Securing Personal Wealth</h3>
+                <p>How to use advanced encryption for financial safety.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 VortexTechWarp Financial Journal. All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+        navLinks.classList.toggle('active');
+        menuToggle.classList.toggle('open');
+        overlay.classList.toggle('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu); // Overlay click par bhi band hoga
+
+    // Links click par menu band ho jaye
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
+</script>
+
+</body>
+</html>

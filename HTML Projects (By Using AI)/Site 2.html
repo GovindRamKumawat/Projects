@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOD Lab | Future of Design</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050507;
+            --bg-card: #0f1014;
+            --primary: #00f2ea; /* Neon Cyan */
+            --secondary: #007bff; /* Electric Blue */
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --glow-shadow: 0 0 40px rgba(0, 242, 234, 0.15);
+            --radius-xl: 40px;
+            --radius-md: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Outfit', sans-serif; 
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 123, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 242, 234, 0.05), transparent 25%);
+        }
+
+        /* --- Floating Glass Navigation --- */
+        nav {
+            position: fixed;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 10px 30px; /* Thoda compact kiya */
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- UPDATED LOGO CSS START --- */
+        .logo-container img {
+            height: 55px; /* Height fix rakhi hai taaki navbar na bigde */
+            width: auto;  /* Width auto taaki original ratio maintain rahe */
+            border-radius: 15px; /* Smooth rounded corners */
+            object-fit: contain; /* Image crop nahi hogi */
+            
+            /* Premium Visuals */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); /* Halki si background shine */
+            box-shadow: 
+                0 0 15px rgba(0, 242, 234, 0.2), /* Cyan Glow */
+                0 5px 10px rgba(0,0,0,0.3);      /* Drop Shadow */
+            
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.1) rotate(-2deg); /* Slight pop effect */
+            box-shadow: 
+                0 0 25px rgba(0, 242, 234, 0.5),
+                0 10px 20px rgba(0,0,0,0.4);
+            border-color: var(--primary);
+        }
+        /* --- UPDATED LOGO CSS END --- */
+
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- 3D Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 150px 8% 80px;
+            perspective: 1200px;
+        }
+
+        .banner-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 50px 100px -30px rgba(0,0,0,0.8), 0 0 30px rgba(0, 123, 255, 0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            position: relative;
+        }
+
+        .banner-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        .banner-wrapper img {
+            width: 100%;
+            display: block;
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--primary);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: rgba(0, 242, 234, 0.1);
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 242, 234, 0.2);
+            display: inline-block;
+        }
+
+        /* --- Premium Masonry Gallery --- */
+        .gallery-container {
+            padding: 40px 8%;
+            columns: 3 320px;
+            column-gap: 30px;
+        }
+
+        .work-item {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            background: var(--bg-card);
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .work-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--secondary);
+            box-shadow: 0 30px 60px rgba(0, 123, 255, 0.25);
+            z-index: 10;
+        }
+
+        .work-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            display: block;
+            filter: brightness(0.9);
+            transition: 0.5s;
+        }
+
+        .work-item:hover img {
+            filter: brightness(1.1);
+            transform: scale(1.03);
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        /* --- Ultra Contact Section --- */
+        .contact-card {
+            margin: 100px 5%;
+            background: linear-gradient(160deg, #0a101f 0%, #000 100%);
+            border-radius: 60px;
+            padding: 100px 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0, 242, 234, 0.08) 0%, transparent 70%);
+            animation: pulse 4s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+        }
+
+        .contact-card h2 { 
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem); 
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 20px 45px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-whatsapp { 
+            background: #25d366; 
+            color: #fff;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-call { 
+            background: #fff; 
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn:hover { 
+            transform: translateY(-5px) scale(1.05); 
+            filter: brightness(1.2);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 50px; 
+            color: #444; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container { columns: 1; }
+            nav { width: 95%; top: 15px; padding: 10px 20px; }
+            .hero { padding-top: 140px; }
+            .logo-container img { height: 40px; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="https://lh3.googleusercontent.com/d/1a_rpF-ksLyoHsmmkEzTp5dv9hSs0PgH3" alt="DOD Lab Logo">
+            <span class="nav-brand">DOD LAB</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 8px; height: 8px; background: #25d366; border-radius: 50%; box-shadow: 0 0 10px #25d366;"></div>
+            <span style="font-size: 0.75rem; font-weight: 600; color: #fff;">ONLINE</span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="banner-wrapper" id="tilt-box" data-aos="zoom-out" data-aos-duration="1200">
+            <img src="https://lh3.googleusercontent.com/d/19DXZO_JZh5TQnvfiBPLkqdVLEeT_1O7L" alt="DOD Lab Banner">
+        </div>
+        
+        <h1 data-aos="fade-up">Design On Demand</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Creative Solutions • 3D Visuals • Professional UI</p>
+    </section>
+
+    <div class="gallery-container">
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1ofpoHH59uoklgMmx3MhuIoZKbf2-oB3I"><span class="badge">Brand</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/15o5CbcmVp5PPjjDCZs1BUM7GyrlsdQBJ"><span class="badge">Food Menu</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1VrLKEznhNj3V5e35yO35K2PvwcZ0XufU"><span class="badge">Posters</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1JYD3NT6PxpTBxhZT3tDMPB35ck821ml4"><span class="badge">Premium</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1dkwj0DyZQQJ-ACKXlJUxqnMos2msO4Ca"><span class="badge">Modern</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1rVB5dpQTKjV99UWUlAF2Ntq3rZUWXZ28"><span class="badge">Clean</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vC0EsaljDocPnWcS9BG5ttcZ0z_9MTEb"><span class="badge">Cool Design</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vIT3ALtjJ3faf7JCbk-LxnVHxZIVjsav"><span class="badge">Professional</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1pxyzN-6EAdBb60Ruowrkuk3zdml8QcYl"><span class="badge">Creative</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vzrPPvDmD5C6gaKwtmDbziWAS8omCFl1"><span class="badge">3D</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1SYA8MRYRjQIgkW7Dj8rhh_kgr_srYHYR"><span class="badge">Logo</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/10Jem8ogZtBcI4zIZ_eswcARBqKhAYf2l"><span class="badge">Poster</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1CEaiEmEa8Djv8z9rCHroS8kLQwSKmoa3"><span class="badge">Concept</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/141nt9DEKldhl61nOyk0JhKK5SFlZedTC"><span class="badge">Visual Art</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1gnMwzztSwmECj5yua6pcd65Gmy5WY3CQ"><span class="badge">Design</span></div>
+    </div>
+
+    <section class="contact-card" data-aos="fade-up">
+        <h2>Ready to start your project?</h2>
+        <p>dodlab978@gmail.com  |  +91 97821 67792</p>
+        <div class="btn-group">
+            <a href="https://wa.me/919782167792" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+            <a href="tel:+919782167792" class="btn btn-call">
+                <i class="fas fa-phone-alt"></i> Call Now
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 DOD Lab (Design On Demand). All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+
+        const tiltBox = document.getElementById('tilt-box');
+        
+        document.addEventListener('mousemove', (e) => {
+            const { innerWidth, innerHeight } = window;
+            const x = e.clientX;
+            const y = e.clientY;
+            const rotateY = (innerWidth / 2 - x) / 25; 
+            const rotateX = (innerHeight / 2 - y) / 25;
+            tiltBox.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            tiltBox.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+</html>

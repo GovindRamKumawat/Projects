@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOD Lab | Design On Demand</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --deep-blue: #001d3d;
+            --accent-blue: #00d4ff;
+            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            --card-shadow: 0 20px 40px rgba(0, 123, 255, 0.15);
+            --round: 25px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { background: var(--bg-gradient); color: #333; overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 10px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo-container img {
+            height: 60px;
+            width: auto;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            padding: 120px 8% 60px;
+            text-align: center;
+        }
+
+        .banner-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            border-radius: var(--round);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 8px solid white;
+            transition: transform 0.5s ease;
+        }
+
+        .banner-wrapper:hover { transform: scale(1.02); }
+
+        .banner-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--deep-blue);
+            text-shadow: 2px 4px 10px rgba(0,123,255,0.2);
+        }
+
+        /* Portfolio Gallery */
+        .gallery-container {
+            padding: 40px 8%;
+            columns: 3 300px;
+            column-gap: 25px;
+        }
+
+        .work-item {
+            break-inside: avoid;
+            margin-bottom: 25px;
+            background: white;
+            padding: 10px;
+            border-radius: var(--round);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 123, 255, 0.3);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: block;
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* --- UPDATED PREMIUM CONTACT SECTION --- */
+        .contact-card {
+            margin: 80px 8%;
+            background: var(--deep-blue);
+            border-radius: 40px;
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 29, 61, 0.5);
+        }
+
+        /* Animated background glow */
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 60%);
+            animation: rotateGlow 12s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .contact-card h2 { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem); 
+            margin-bottom: 15px; 
+            position: relative;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-whatsapp { 
+            background: #25d366; 
+            color: white; 
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-call { 
+            background: #ffffff; 
+            color: var(--deep-blue); 
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover { 
+            transform: translateY(-8px) scale(1.05); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); 
+        }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px; color: #666; font-size: 0.9rem; }
+
+        /* Mobile Fixes */
+        @media (max-width: 768px) {
+            nav { padding: 5px 5%; }
+            .logo-container img { height: 45px; }
+            .gallery-container { columns: 1; padding: 20px 5%; }
+            .contact-card { padding: 60px 20px; margin: 40px 5%; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="https://lh3.googleusercontent.com/d/1a_rpF-ksLyoHsmmkEzTp5dv9hSs0PgH3" alt="DOD Lab Logo">
+        </div>
+        <div style="font-weight: 700; color: #001d3d;">DOD LAB</div>
+    </nav>
+
+    <section class="hero">
+        <div class="banner-wrapper" data-aos="zoom-in">
+            <img src="https://lh3.googleusercontent.com/d/19DXZO_JZh5TQnvfiBPLkqdVLEeT_1O7L" alt="DOD Lab Banner">
+        </div>
+        <h1 data-aos="fade-up">Design On Demand</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Creative Solutions | 3D Visuals | Professional UI</p>
+    </section>
+
+    <div class="gallery-container">
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1ofpoHH59uoklgMmx3MhuIoZKbf2-oB3I" alt="DOD Work"><span class="badge">Brand</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/15o5CbcmVp5PPjjDCZs1BUM7GyrlsdQBJ" alt="DOD Work"><span class="badge">Food Menu</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1VrLKEznhNj3V5e35yO35K2PvwcZ0XufU" alt="DOD Work"><span class="badge">Posters</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1JYD3NT6PxpTBxhZT3tDMPB35ck821ml4" alt="DOD Work"><span class="badge">Premium</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1dkwj0DyZQQJ-ACKXlJUxqnMos2msO4Ca" alt="DOD Work"><span class="badge">Modern</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1rVB5dpQTKjV99UWUlAF2Ntq3rZUWXZ28" alt="DOD Work"><span class="badge">Clean</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vC0EsaljDocPnWcS9BG5ttcZ0z_9MTEb" alt="DOD Work"><span class="badge">Cool Design</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vIT3ALtjJ3faf7JCbk-LxnVHxZIVjsav" alt="DOD Work"><span class="badge">Professional</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1pxyzN-6EAdBb60Ruowrkuk3zdml8QcYl" alt="DOD Work"><span class="badge">Creative</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1vzrPPvDmD5C6gaKwtmDbziWAS8omCFl1" alt="DOD Work"><span class="badge">3D</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1SYA8MRYRjQIgkW7Dj8rhh_kgr_srYHYR" alt="DOD Work"><span class="badge">Logo</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/10Jem8ogZtBcI4zIZ_eswcARBqKhAYf2l" alt="DOD Work"><span class="badge">Poster</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1CEaiEmEa8Djv8z9rCHroS8kLQwSKmoa3" alt="DOD Work"><span class="badge">Concept</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/141nt9DEKldhl61nOyk0JhKK5SFlZedTC" alt="DOD Work"><span class="badge">Visual Art</span></div>
+        <div class="work-item" data-aos="fade-up"><img src="https://lh3.googleusercontent.com/d/1gnMwzztSwmECj5yua6pcd65Gmy5WY3CQ" alt="DOD Work"><span class="badge">Design</span></div>
+    </div>
+
+    <section class="contact-card" data-aos="fade-up">
+        <h2>Ready to start your project?</h2>
+        <p>dodlab978@gmail.com  |  +91 97821 67792</p>
+        <div class="btn-group">
+            <a href="https://wa.me/919782167792" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+            <a href="tel:+919782167792" class="btn btn-call">
+                <i class="fas fa-phone-alt"></i> Call Now
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 DOD Lab (Design On Demand). All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>
