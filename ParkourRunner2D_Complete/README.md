@@ -499,15 +499,9 @@ ParkourRunner2D/
 ## 📞 Support & Contact
 
 ### Technical Support
-- Email: support@yourcompany.com
-- Website: https://yourcompany.com/support
-- Discord: discord.gg/yourserver
+- Email: vortextechwarp.2006@gmail.com
+- Website: https://vortextechwarp.com
 
-### Community
-- Reddit: r/ParkourRunner2D
-- Twitter: @ParkourRunner2D
-- Instagram: @ParkourRunner2D
-- YouTube: Parkour Runner 2D
 
 ---
 
@@ -515,7 +509,7 @@ ParkourRunner2D/
 
 This project is proprietary software. All rights reserved.
 
-© 2026 Your Company Name. All rights reserved.
+© 2026 Govind Ram Kumawat. All rights reserved.
 
 ---
 
