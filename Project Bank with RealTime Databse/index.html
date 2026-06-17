@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farzi National Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            transition: all 0.5s ease-in-out;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            color: #00f2fe;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+        p {
+            font-size: 13px;
+            color: #bdc3c7;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #4facfe;
+        }
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+        .btn:disabled {
+            background: #7f8c8d;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+        }
+        .link-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #a1a1a1;
+        }
+        .link-text span {
+            color: #00f2fe;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .link-text span:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .service-card:hover {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: #00f2fe;
+            transform: scale(1.03);
+        }
+        .status-msg {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+        .loading { color: #f1c40f; }
+
+        .premium-footer {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .premium-footer h4 {
+            font-size: 14px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .premium-footer .dev-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .premium-footer .links-wrapper {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 13px;
+        }
+        .premium-footer a {
+            color: #00f2fe;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+        .premium-footer a:hover {
+            color: #4facfe;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-box" class="container">
+        <h2>Farzi Bank</h2>
+        <p>Secure Sheet Portal Login</p>
+        <div class="form-group">
+            <label>Account ID</label>
+            <input type="number" id="login-id" placeholder="Enter Account ID">
+        </div>
+        <div class="form-group">
+            <label>Account Holder Name</label>
+            <input type="text" id="login-name" placeholder="Enter Name">
+        </div>
+        <button class="btn" id="login-submit-btn" onclick="handleLogin()">Access Dashboard</button>
+        <div class="link-text">New user? <span onclick="switchScreen('signup-box')">Create Account</span></div>
+        <div id="login-msg" class="status-msg"></div>
+    </div>
+
+    <div id="signup-box" class="container hidden">
+        <h2>Open Account</h2>
+        <p>Join Farzi National Bank</p>
+        <div class="form-group">
+            <label>Desired ID</label>
+            <input type="number" id="sign-id" placeholder="Create Unique ID">
+        </div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="sign-name" placeholder="Enter Your Name">
+        </div>
+        <div class="form-group">
+            <label>Initial Deposit (INR)</label>
+            <input type="number" id="sign-balance" placeholder="Min. 500 INR">
+        </div>
+        <div class="form-group">
+            <label>Secure 4-Digit Security PIN</label>
+            <input type="password" id="sign-pin" placeholder="Enter Security PIN" maxlength="4">
+        </div>
+        <div class="link-text">Already registered? <span onclick="switchScreen('login-box')">Login Here</span></div>
+        <button class="btn" id="signup-submit-btn" onclick="handleSignup()">Register Account</button>
+        <div id="sign-msg" class="status-msg"></div>
+    </div>
+
+    <div id="dashboard-box" class="container hidden">
+        <h2 id="welcome-user">Welcome, User</h2>
+        <p>Account Dashboard (Cloud Sync)</p>
+        
+        <div class="grid">
+            <div class="service-card" onclick="showAction('balance')">📊 Balance</div>
+            <div class="service-card" onclick="showAction('deposit')">💰 Deposit</div>
+            <div class="service-card" onclick="showAction('withdraw')">💸 Withdraw</div>
+            <div class="service-card" onclick="showAction('help')">❓ Help Support</div>
+        </div>
+
+        <div id="action-panel" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <h3 id="action-title" style="color: #00f2fe; margin-bottom: 15px;">Action</h3>
+            <div class="form-group" id="amount-group">
+                <label id="amount-label">Amount (INR)</label>
+                <input type="number" id="action-amount" placeholder="Enter Amount">
+            </div>
+            <div class="form-group">
+                <label>Security PIN</label>
+                <input type="password" id="action-pin" placeholder="4-Digit PIN" maxlength="4">
+            </div>
+            <button class="btn" id="action-btn" onclick="executeAction()">Confirm Transaction</button>
+        </div>
+
+        <button class="btn" onclick="handleLogout()" style="background: transparent; border: 1px solid #e74c3c; box-shadow: none; color: #e74c3c; margin-top: 25px;">Secure Logout</button>
+        <div id="dash-msg" class="status-msg"></div>
+    </div>
+
+    <div class="premium-footer">
+        <h4>Chief Architect</h4>
+        <div class="dev-name">𝐆𝐨𝐯𝐢𝐧𝐝 𝐑𝐚𝐦</div>
+        <div class="links-wrapper">
+            <a href="https://VortexTechWarp.com" target="_blank">🌐 VortexTechWarp.com</a>
+            <a href="https://www.instagram.com/_._govind_ram_._?igsh=MXVwdTVxMGZ3amsxaw==" target="_blank">📸 Follow - Ꭾɪᴋᴀᴄʜᴜ</a>
+        </div>
+    </div>
+
+    <script>
+        // WEB APP URL CONNECTED VIA DEPLOYMENT NODE
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbwMiHJDp7ZswnJwPhFH6q97b6_fv_uv2aoMo07FuwziKzN1h9Kt7sfe5n6qsPWuk9tuRA/exec";
+        
+        let currentUser = null;
+        let currentAction = '';
+
+        window.onload = function() {
+            let sessionData = sessionStorage.getItem("activeUserSession");
+            if (sessionData) {
+                currentUser = JSON.parse(sessionData);
+                document.getElementById('welcome-user').innerText = `Hello, ${currentUser.Name}!`;
+                switchScreen('dashboard-box');
+            }
+        };
+
+        function switchScreen(boxId) {
+            document.getElementById('login-box').classList.add('hidden');
+            document.getElementById('signup-box').classList.add('hidden');
+            document.getElementById('dashboard-box').classList.add('hidden');
+            document.getElementById(boxId).classList.remove('hidden');
+            clearMessages();
+        }
+
+        function clearMessages() {
+            document.querySelectorAll('.status-msg').forEach(el => el.innerHTML = '');
+            document.getElementById('action-panel').classList.add('hidden');
+        }
+
+        // 1. FIXED SECURE SERVER-SIDE LOGIN ROUTINE
+        function handleLogin() {
+            let id = parseInt(document.getElementById('login-id').value);
+            let name = document.getElementById('login-name').value.trim();
+            let msg = document.getElementById('login-msg');
+            let btn = document.getElementById('login-submit-btn');
+
+            if (!id || !name) {
+                msg.className = "status-msg error";
+                msg.innerText = "Please enter both ID and Name.";
+                return;
+            }
+
+            msg.className = "status-msg loading";
+            msg.innerText = "Querying Database Registry Matrices... Please wait.";
+            btn.disabled = true;
+
+            // Direct API payload communication with Web App Endpoint
+            fetch(webAppUrl, {
+                method: "POST",
+                body: JSON.stringify({ action: "login", id: id, name: name })
+            })
+            .then(res => res.json())
+            .then(response => {
+                if(response.status === "success") {
+                    currentUser = {
+                        ID: parseInt(response.account.id),
+                        Name: response.account.name,
+                        Balance: parseFloat(response.account.balance),
+                        Pin: parseInt(response.account.pin)
+                    };
+                    sessionStorage.setItem("activeUserSession", JSON.stringify(currentUser));
+                    document.getElementById('welcome-user').innerText = `Hello, ${currentUser.Name}!`;
+                    btn.disabled = false;
+                    switchScreen('dashboard-box');
+                } else {
+                    msg.className = "status-msg error";
+                    msg.innerText = "❌ Denied: " + response.message;
+                    btn.disabled = false;
+                }
+            })
+            .catch(() => {
+                msg.className = "status-msg error";
+                msg.innerText = "System Exception: Execution failure or API node timeout.";
+                btn.disabled = false;
+            });
+        }
+
+        // 2. STABLE SIGNUP CONTROLLER GATEWAY
+        function handleSignup() {
+            let id = parseInt(document.getElementById('sign-id').value);
+            let name = document.getElementById('sign-name').value.trim();
+            let balance = parseFloat(document.getElementById('sign-balance').value);
+            let pin = parseInt(document.getElementById('sign-pin').value);
+            let msg = document.getElementById('sign-msg');
+            let btn = document.getElementById('signup-submit-btn');
+
+            if (!id || !name || isNaN(balance) || !pin || pin.toString().length !== 4) {
+                msg.className = "status-msg error";
+                msg.innerText = "All attributes mandatory. PIN profile must equal 4 digits.";
+                return;
+            }
+
+            if(balance < 500) {
+                msg.className = "status-msg error";
+                msg.innerText = "Deficit Capital: Minimum opening balance must be ₹500.";
+                return;
+            }
+
+            msg.className = "status-msg loading";
+            msg.innerText = "Processing unique index token validations...";
+            btn.disabled = true;
+
+            fetch(webAppUrl, {
+                method: "POST",
+                body: JSON.stringify({ action: "signup", id: id, name: name, balance: balance, pin: pin })
+            })
+            .then(res => res.json())
+            .then(response => {
+                if(response.status === "success") {
+                    msg.className = "status-msg success";
+                    msg.innerText = "🎉 Success! Records structural logs committed to Cloud. Environment reloading...";
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    msg.className = "status-msg error";
+                    msg.innerText = "❌ Failed: " + response.message;
+                    btn.disabled = false;
+                }
+            })
+            .catch(() => {
+                msg.className = "status-msg error";
+                msg.innerText = "Pipeline Failure: Transaction mapping denied.";
+                btn.disabled = false;
+            });
+        }
+
+        function showAction(type) {
+            currentAction = type;
+            let panel = document.getElementById('action-panel');
+            let title = document.getElementById('action-title');
+            let amtGroup = document.getElementById('amount-group');
+            let amtLabel = document.getElementById('amount-label');
+            let btn = document.getElementById('action-btn');
+            
+            panel.classList.remove('hidden');
+            document.getElementById('action-amount').value = '';
+            document.getElementById('action-pin').value = '';
+            document.getElementById('dash-msg').innerHTML = '';
+
+            if (type === 'balance') {
+                title.innerText = "Check Balance Portal";
+                amtGroup.classList.add('hidden');
+                btn.innerText = "Fetch Balance";
+            } else if (type === 'deposit') {
+                title.innerText = "Deposit Safe Vault";
+                amtGroup.classList.remove('hidden');
+                amtLabel.innerText = "Amount (INR)";
+                btn.innerText = "Authorize Deposit";
+            } else if (type === 'withdraw') {
+                title.innerText = "Secure Instant Withdrawal";
+                amtGroup.classList.remove('hidden');
+                amtLabel.innerText = "Amount (INR) [Max Limit: ₹10,000]";
+                btn.innerText = "Authorize Cashout";
+            } else if (type === 'help') {
+                title.innerText = "Support & Help Desk";
+                amtGroup.classList.add('hidden');
+                btn.innerText = "Show Information";
+            }
+        }
+
+        // 3. SECURE DOUBLE-AUTH BALANCE TRANSACTION PIPELINE
+        function executeAction() {
+            let pin = parseInt(document.getElementById('action-pin').value);
+            let amount = parseFloat(document.getElementById('action-amount').value);
+            let msg = document.getElementById('dash-msg');
+
+            if (currentAction === 'help') {
+                msg.className = "status-msg success";
+                msg.innerHTML = "📧 Support: help@farzibank.com <br>🌐 Financial Ecosystem: VortexTechWarp.com";
+                return;
+            }
+
+            if (isNaN(pin) || pin !== currentUser.Pin) {
+                msg.className = "status-msg error";
+                msg.innerText = "❌ Security Access Aborted: Security PIN validation failed! Access Denied.";
+                return;
+            }
+
+            if (currentAction === 'balance') {
+                msg.className = "status-msg success";
+                msg.innerText = `Current Cloud Balance: ₹ ${currentUser.Balance.toLocaleString('en-IN')}`;
+                document.getElementById('action-panel').classList.add('hidden');
+                return;
+            } 
+            
+            let trxType = "";
+            let expectedBalance = currentUser.Balance;
+
+            if (currentAction === 'deposit') {
+                if (amount <= 0 || isNaN(amount)) {
+                    msg.className = "status-msg error";
+                    msg.innerText = "Invalid Parameter: Enter a valid positive amount.";
+                    return;
+                }
+                trxType = "deposit";
+                expectedBalance += amount;
+            } 
+            else if (currentAction === 'withdraw') {
+                if (amount <= 0 || isNaN(amount)) {
+                    msg.className = "status-msg error";
+                    msg.innerText = "Invalid Parameter: Enter a valid positive withdrawal volume.";
+                    return;
+                }
+                if (amount > 10000) {
+                    msg.className = "status-msg error";
+                    msg.innerText = "❌ Limit Violation: Single cashout operation maximum limit cap is ₹10,000.";
+                    return;
+                }
+                if (amount > currentUser.Balance) {
+                    msg.className = "status-msg error";
+                    msg.innerText = "Transaction Declined: Insufficient capital reserves allocated in cloud node.";
+                    return;
+                }
+                trxType = "withdraw";
+                expectedBalance -= amount;
+            }
+
+            if (trxType !== "") {
+                msg.className = "status-msg loading";
+                msg.innerText = "Transmitting state changes to Google Ledger Node...";
+
+                let updatePayload = {
+                    action: "executeTransaction",
+                    id: currentUser.ID,
+                    name: currentUser.Name,
+                    pin: pin,
+                    transactionType: trxType,
+                    amount: amount
+                };
+
+                fetch(webAppUrl, {
+                    method: "POST",
+                    body: JSON.stringify(updatePayload)
+                })
+                .then(res => res.json())
+                .then(response => {
+                    if (response.status === "success") {
+                        currentUser.Balance = expectedBalance;
+                        sessionStorage.setItem("activeUserSession", JSON.stringify(currentUser));
+                        
+                        msg.className = "status-msg success";
+                        msg.innerText = "✅ Confirmed! Cloud cell logs synchronized successfully. Resetting environment state...";
+                        
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    } else {
+                        msg.className = "status-msg error";
+                        msg.innerText = "❌ Rejected by Cloud: " + response.message;
+                    }
+                })
+                .catch(() => {
+                    msg.className = "status-msg error";
+                    msg.innerText = "Network Sync Interface Timeout Failure.";
+                });
+            }
+
+            document.getElementById('action-panel').classList.add('hidden');
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem("activeUserSession");
+            currentUser = null;
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
